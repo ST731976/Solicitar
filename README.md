@@ -1,4 +1,4 @@
-SOLICITAR MINICREDITO
+ENCUENTRA TU PRESTAMO Y SOLICITA.
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -19,11 +19,11 @@ SOLICITAR MINICREDITO
     <div class="container">
         <div>
             <label for="loanAmount">Minicrédito: €<span id="loanAmountValue">50</span></label>
-            <input type="range" id="loanAmount" min="50" max="1000" value="50" step="50" oninput="updateLoanAmount()">
+            <input type="range" id="loanAmount" min="50" max="10000" value="50" step="50" oninput="updateLoanAmount()">
         </div>
         <div>
-            <label for="loanTerm">Plazo: <span id="loanTermValue">1</span> día(s)</label>
-            <input type="range" id="loanTerm" min="1" max="90" value="1" step="1" oninput="updateLoanTerm()">
+            <label for="loanTerm">Plazo: <span id="loanTermValue">1</span> mes(es)</label>
+            <input type="range" id="loanTerm" min="1" max="240" value="1" step="1" oninput="updateLoanTerm()">
         </div>
         <button id="applyButton" class="apply-button">Solicitar</button>
         <div id="loanOptions" style="margin-top: 20px;"></div>
@@ -44,34 +44,33 @@ SOLICITAR MINICREDITO
             const loanOptionsDiv = document.getElementById('loanOptions');
             loanOptionsDiv.innerHTML = '';
 
-            if (amount >= 50 && amount <= 100) {
+            if (amount >= 50 && amount <= 800) {
                 loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 1</a>';
-            } else if (amount > 100 && amount <= 750) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 2</a>';
-            } else if (amount > 750 && amount <= 1000) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 3</a>';
+            } else if (amount > 800 && amount <= 1000) {
+                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 2</a>';
+            } else if (amount > 1000 && amount <= 10000) {
+                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 3</a>';
             }
         }
 
         document.getElementById('applyButton').addEventListener('click', function() {
             const loanAmount = document.getElementById('loanAmount').value;
             const loanTerm = document.getElementById('loanTerm').value;
-            let url;
 
-            if (loanAmount >= 50 && loanAmount <= 1000) {
-                if (loanAmount >= 50 && loanAmount <= 100) {
-                    url = `http://doafftracking.tech/zaimoo.es/u2wsh/1`;
-                } else if (loanAmount > 100 && loanAmount <= 750) {
-                    url = `http://doafftracking.tech/zaimoo.es/u2wsh/1`;
-                } else if (loanAmount > 750 && loanAmount <= 1000) {
-                    url = `http://doafftracking.tech/credityes.es/u2wsh/1`;
+            if (loanAmount >= 50 && loanAmount <= 10000) {
+                let url;
+
+                if (loanAmount >= 50 && loanAmount <= 800) {
+                    url = 'http://doafftracking.tech/zaimoo.es/u2wsh/1';
+                } else if (loanAmount > 800 && loanAmount <= 1000) {
+                    url = 'http://doafftracking.tech/credityes.es/u2wsh/1';
+                } else if (loanAmount > 1000 && loanAmount <= 10000) {
+                    url = 'http://doafftracking.tech/zaimoo.es/u2wsh/1';
                 }
+
                 window.open(url, '_blank');
-            } else {
-                alert("El monto del minicrédito debe estar entre 50 y 1000 euros.");
             }
         });
     </script>
 </body>
 </html>
-

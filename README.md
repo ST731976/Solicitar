@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,11 +43,11 @@ function updateLoanOptions(amount) {
     loanOptionsDiv.innerHTML = '';
 
     if (amount >= 50 && amount <= 100) {
-        loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 1</a>';
+        loanOptionsDiv.innerHTML += '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 1</a>';
     } else if (amount > 100 && amount <= 750) {
-        loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 2</a>';
+        loanOptionsDiv.innerHTML += '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 2</a>';
     } else if (amount > 750 && amount <= 1000) {
-        loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 3</a>';
+        loanOptionsDiv.innerHTML += '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 3</a>';
     }
 }
 

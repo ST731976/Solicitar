@@ -1,4 +1,4 @@
-ENCUENTRA TU PRESTAMO Y SOLICITA.
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@ ENCUENTRA TU PRESTAMO Y SOLICITA.
         </div>
         <div>
             <label for="loanTerm">Plazo: <span id="loanTermValue">1</span> mes(es)</label>
-            <input type="range" id="loanTerm" min="1" max="240" value="1" step="1" oninput="updateLoanTerm()">
+            <input type="range" id="loanTerm" min="1" max="60" value="1" step="1" oninput="updateLoanTerm()">
         </div>
         <button id="applyButton" class="apply-button">Solicitar</button>
         <div id="loanOptions" style="margin-top: 20px;"></div>
@@ -44,12 +44,10 @@ ENCUENTRA TU PRESTAMO Y SOLICITA.
             const loanOptionsDiv = document.getElementById('loanOptions');
             loanOptionsDiv.innerHTML = '';
 
-            if (amount >= 50 && amount <= 800) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 1</a>';
-            } else if (amount > 800 && amount <= 1000) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 2</a>';
+            if (amount >= 50 && amount <= 1000) {
+                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 1</a>';
             } else if (amount > 1000 && amount <= 10000) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 3</a>';
+                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 2</a>';
             }
         }
 
@@ -60,9 +58,7 @@ ENCUENTRA TU PRESTAMO Y SOLICITA.
             if (loanAmount >= 50 && loanAmount <= 10000) {
                 let url;
 
-                if (loanAmount >= 50 && loanAmount <= 800) {
-                    url = 'http://doafftracking.tech/zaimoo.es/u2wsh/1';
-                } else if (loanAmount > 800 && loanAmount <= 1000) {
+                if (loanAmount >= 50 && loanAmount <= 1000) {
                     url = 'http://doafftracking.tech/credityes.es/u2wsh/1';
                 } else if (loanAmount > 1000 && loanAmount <= 10000) {
                     url = 'http://doafftracking.tech/zaimoo.es/u2wsh/1';

@@ -43,10 +43,10 @@
             const loanOptionsDiv = document.getElementById('loanOptions');
             loanOptionsDiv.innerHTML = '';
 
-            if (amount >= 50 && amount <= 1000) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace 1</a>';
-            } else if (amount > 1000 && amount <= 10000) {
-                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace 2</a>';
+            if (amount == 1000) {
+                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/credityes.es/u2wsh/1">Enlace Credityes</a>';
+            } else {
+                loanOptionsDiv.innerHTML = '<a href="http://doafftracking.tech/zaimoo.es/u2wsh/1">Enlace Zaimo</a>';
             }
         }
 
@@ -54,18 +54,17 @@
             const loanAmount = document.getElementById('loanAmount').value;
             const loanTerm = document.getElementById('loanTerm').value;
 
-            if (loanAmount >= 50 && loanAmount <= 10000) {
-                let url;
+            let url;
 
-                if (loanAmount >= 50 && loanAmount <= 1000) {
-                    url = 'http://doafftracking.tech/credityes.es/u2wsh/1';
-                } else if (loanAmount > 1000 && loanAmount <= 10000) {
-                    url = 'http://doafftracking.tech/zaimoo.es/u2wsh/1';
-                }
-
-                window.open(url, '_blank');
+            if (loanAmount == 1000) {
+                url = 'http://doafftracking.tech/credityes.es/u2wsh/1';
+            } else {
+                url = 'http://doafftracking.tech/zaimoo.es/u2wsh/1';
             }
+
+            window.open(url, '_blank');
         });
     </script>
 </body>
 </html>
+

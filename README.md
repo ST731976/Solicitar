@@ -7,10 +7,10 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f5f5f5; }
         .container { padding: 20px; text-align: center; max-width: 400px; margin: 0 auto; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
         label { font-weight: bold; display: block; margin-bottom: 10px; color: #007BFF; font-size: 1.2em; }
-        input[type="range"] { width: 100%; height: 15px; background: #ddd; outline: none; border-radius: 5px; -webkit-appearance: none; }
-        input[type="range"]::-webkit-slider-thumb { width: 25px; height: 25px; background: #007BFF; border-radius: 50%; cursor: pointer; -webkit-appearance: none; }
-        input[type="range"]::-moz-range-thumb { width: 25px; height: 25px; background: #007BFF; border-radius: 50%; cursor: pointer; }
-        .apply-button { display: inline-block; padding: 12px 25px; margin-top: 20px; background-color: #28a745; color: #fff; font-size: 1.2em; font-weight: bold; text-decoration: none; border-radius: 5px; cursor: pointer; }
+        input[type="range"] { width: 100%; height: 20px; background: #ddd; outline: none; border-radius: 5px; -webkit-appearance: none; margin-bottom: 20px; }
+        input[type="range"]::-webkit-slider-thumb { width: 30px; height: 30px; background: #007BFF; border-radius: 50%; cursor: pointer; -webkit-appearance: none; }
+        input[type="range"]::-moz-range-thumb { width: 30px; height: 30px; background: #007BFF; border-radius: 50%; cursor: pointer; }
+        .apply-button { display: inline-block; padding: 12px 25px; background-color: #28a745; color: #fff; font-size: 1.2em; font-weight: bold; text-decoration: none; border-radius: 5px; cursor: pointer; }
         .apply-button:hover { background-color: #218838; }
     </style>
 </head>
@@ -44,6 +44,7 @@
     </script>
 </body>
 </html>
+
 
 
 

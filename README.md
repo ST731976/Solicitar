@@ -237,7 +237,10 @@
         function processRequest() {
             document.getElementById('question-container').style.display = 'none';
             document.getElementById('processing').style.display = 'block';
-            setTimeout(redirectToOffer, 3000); // Redirigir después de 3 segundos
+            setTimeout(function() {
+                document.getElementById('processing').innerText = 'A continuación te redirigiremos a la opción más adecuada para ti.';
+                setTimeout(redirectToOffer, 2000); // Esperar 2 segundos antes de redirigir
+            }, 3000); // Mostrar el mensaje de procesamiento durante 3 segundos
         }
 
         function redirectToOffer() {

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -25,19 +26,7 @@
             width: 100%;
             max-width: 500px;
         }
-        .question-container {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            text-align: left;
-            display: none; /* Inicialmente oculto */
-        }
-        .question-container.active {
-            display: block; /* Mostrar cuando esté activo */
-        }
-        #processing, #result {
+        #question-container, #processing, #result {
             display: none;
         }
         #processing {
@@ -98,20 +87,10 @@
 <body>
     <div id="container">
         <h1>Iniciar tu solicitud</h1>
-        <div class="question-container" id="question-container-1">
-            <p id="question-1"></p>
-            <div id="answer-container-1"></div>
-            <button class="button" onclick="nextQuestion(1)">Siguiente</button>
-        </div>
-        <div class="question-container" id="question-container-2">
-            <p id="question-2"></p>
-            <div id="answer-container-2"></div>
-            <button class="button" onclick="nextQuestion(2)">Siguiente</button>
-        </div>
-        <div class="question-container" id="question-container-3">
-            <p id="question-3"></p>
-            <div id="answer-container-3"></div>
-            <button class="button" onclick="nextQuestion(3)">Siguiente</button>
+        <div id="question-container">
+            <p id="question"></p>
+            <div id="answer-container"></div>
+            <button class="button" onclick="nextQuestion()">Siguiente</button>
         </div>
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
@@ -179,43 +158,42 @@
 
         let currentQuestion = 0;
 
-        function showQuestion(questionNumber) {
-            const questionData = questions[questionNumber];
-            const containerId = `question-container-${questionNumber + 1}`;
-            const questionId = `question-${questionNumber + 1}`;
-            const answerContainerId = `answer-container-${questionNumber + 1}`;
-            
-            document.getElementById(containerId).classList.add('active');
-            document.getElementById(questionId).innerText = questionData.question.replace('&#191;', '');
-            
-            const answerContainer = document.getElementById(answerContainerId);
-            answerContainer.innerHTML = '';
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                const questionData = questions[currentQuestion];
+                document.getElementById('question').innerText = questionData.question.replace('&#191;', '');
+                const answerContainer = document.getElementById('answer-container');
+                answerContainer.innerHTML = '';
 
-            if (questionData.type === 'text' || questionData.type === 'number') {
-                const input = document.createElement('input');
-                input.type = questionData.type;
-                input.id = 'answer';
-                input.required = questionData.required;
-                answerContainer.appendChild(input);
-            } else if (questionData.type === 'radio') {
-                questionData.options.forEach(option => {
-                    const label = document.createElement('label');
+                if (questionData.type === 'text' || questionData.type === 'number') {
                     const input = document.createElement('input');
-                    input.type = 'radio';
-                    input.name = 'answer';
-                    input.value = option;
-                    label.appendChild(input);
-                    label.appendChild(document.createTextNode(option));
-                    answerContainer.appendChild(label);
-                    answerContainer.appendChild(document.createElement('br'));
-                });
+                    input.type = questionData.type;
+                    input.id = 'answer';
+                    input.required = questionData.required;
+                    answerContainer.appendChild(input);
+                } else if (questionData.type === 'radio') {
+                    questionData.options.forEach(option => {
+                        const label = document.createElement('label');
+                        const input = document.createElement('input');
+                        input.type = 'radio';
+                        input.name = 'answer';
+                        input.value = option;
+                        label.appendChild(input);
+                        label.appendChild(document.createTextNode(option));
+                        answerContainer.appendChild(label);
+                        answerContainer.appendChild(document.createElement('br'));
+                    });
+                }
+
+                document.getElementById('question-container').style.display = 'block';
+            } else {
+                processRequest();
             }
         }
 
-        function nextQuestion(questionNumber) {
-            const questionData = questions[questionNumber];
+        function nextQuestion() {
+            const questionData = questions[currentQuestion];
             let answer = '';
-            
             if (questionData.type === 'text' || questionData.type === 'number') {
                 answer = document.getElementById('answer').value;
             } else if (questionData.type === 'radio') {
@@ -247,24 +225,18 @@
 
             if (questionData.question.includes('¿Tienes un código de oferta?') && answer === 'Sí') {
                 currentQuestion++;
-                showQuestion(currentQuestion);
+                showQuestion();
                 return;
             } else if (questionData.question.includes('¿Tienes un código de oferta?') && answer === 'No') {
                 currentQuestion += 2; // Saltar la pregunta opcional
             }
 
             currentQuestion++;
-            if (currentQuestion < questions.length) {
-                showQuestion(currentQuestion);
-            } else {
-                processRequest();
-            }
+            showQuestion();
         }
 
         function processRequest() {
-            document.querySelectorAll('.question-container').forEach(container => {
-                container.style.display = 'none';
-            });
+            document.getElementById('question-container').style.display = 'none';
             document.getElementById('processing').style.display = 'block';
             setTimeout(function() {
                 document.getElementById('processing').innerText = 'A continuación te redirigiremos a la opción más adecuada para ti.';
@@ -278,7 +250,7 @@
         }
 
         // Iniciar la primera pregunta
-        showQuestion(currentQuestion);
+        showQuestion();
     </script>
 </body>
 </html>

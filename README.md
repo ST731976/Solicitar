@@ -245,7 +245,7 @@
 
         function redirectToOffer() {
             const randomIndex = Math.floor(Math.random() * links.length);
-            window.open(links[randomIndex], '_blank');
+            window.location.href = links[randomIndex]; // Cambio a window.location.href para evitar el bloqueo de ventanas emergentes
         }
 
         // Iniciar la primera pregunta

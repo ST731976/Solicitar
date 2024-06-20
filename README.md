@@ -50,6 +50,7 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             width: 100%;
+            max-width: 200px; /* Ajuste el ancho máximo para dispositivos móviles */
         }
         .button:hover {
             background-color: #0091ea;

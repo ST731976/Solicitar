@@ -69,9 +69,7 @@
             margin: 10px 0;
             font-size: 16px;
             color: #ffeb3b;
-        }
-        .optional {
-            color: #b0bec5;
+            text-align: left;
         }
         h1 {
             font-size: 24px;
@@ -80,6 +78,7 @@
         }
         p {
             font-size: 18px;
+            text-align: left;
         }
     </style>
 </head>
@@ -162,7 +161,7 @@
         function showQuestion() {
             if (currentQuestion < questions.length) {
                 const questionData = questions[currentQuestion];
-                document.getElementById('question').innerText = questionData.question;
+                document.getElementById('question').innerText = questionData.question.replace('&#191;', '');
                 const answerContainer = document.getElementById('answer-container');
                 answerContainer.innerHTML = '';
 

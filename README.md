@@ -13,6 +13,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
         }
         #container {
             background: rgba(0, 0, 0, 0.9);
@@ -20,7 +22,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
             text-align: center;
-            width: 80%;
+            width: 100%;
             max-width: 500px;
         }
         #question-container, #processing, #result {
@@ -47,18 +49,20 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
         }
         .button:hover {
             background-color: #0091ea;
             transform: scale(1.05);
         }
-        input[type="text"], input[type="number"] {
-            width: 100%;
+        input[type="text"], input[type="number"], input[type="radio"] {
+            width: calc(100% - 22px); /* Padding adjustment */
             padding: 10px;
             margin: 10px 0;
             border: none;
             border-radius: 5px;
             font-size: 16px;
+            box-sizing: border-box;
         }
         label {
             display: block;
@@ -253,8 +257,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-

@@ -94,8 +94,6 @@
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
             Nuestro sistema automático ha procesado tus datos y a continuación te ofrece la opción más adecuada para ti.
-            <br><br>
-            <button id="result-button" class="button" onclick="redirect()">Ir a la oferta</button>
         </div>
     </div>
 
@@ -239,15 +237,10 @@
         function processRequest() {
             document.getElementById('question-container').style.display = 'none';
             document.getElementById('processing').style.display = 'block';
-            setTimeout(showResult, 3000);
+            setTimeout(redirectToOffer, 3000); // Redirigir después de 3 segundos
         }
 
-        function showResult() {
-            document.getElementById('processing').style.display = 'none';
-            document.getElementById('result').style.display = 'block';
-        }
-
-        function redirect() {
+        function redirectToOffer() {
             const randomIndex = Math.floor(Math.random() * links.length);
             window.open(links[randomIndex], '_blank');
         }

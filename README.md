@@ -152,9 +152,7 @@
             }
         ];
 
-        const links = [
-            "http://doafftracking.tech/zaimoo.es/u2wsh/1" // Este es el enlace que redirige al usuario.
-        ];
+        const link = "http://doafftracking.tech/zaimoo.es/u2wsh/1"; // Este es el enlace que redirige al usuario.
 
         let currentQuestion = 0;
 
@@ -245,8 +243,7 @@
         }
 
         function redirectToOffer() {
-            const randomIndex = Math.floor(Math.random() * links.length);
-            window.location.href = links[randomIndex]; // Cambio a window.location.href para evitar el bloqueo de ventanas emergentes
+            window.open(link, '_blank'); // Abrir en una nueva pestaña
         }
 
         // Iniciar la primera pregunta

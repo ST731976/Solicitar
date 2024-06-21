@@ -253,10 +253,7 @@
         }
 
         function redirectToOffer() {
-            const a = document.createElement('a');
-            a.href = link;
-            a.target = '_blank';
-            a.click();
+            window.open(link, '_blank'); // Abrir el enlace en una nueva pestaña
         }
 
         // Iniciar la primera pregunta

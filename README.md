@@ -112,6 +112,8 @@
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
             Nuestro sistema automático ha procesado tus datos y a continuación te ofrece la opción más adecuada para ti.
+            <br><br>
+            Si estás de acuerdo, haz clic en <button class="button" onclick="redirectToOffer()">Solicitar</button>.
         </div>
     </div>
 

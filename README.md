@@ -82,6 +82,14 @@
             color: #ffffff; /* Color del texto blanco */
             text-align: left;
         }
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .radio-group label {
+            width: calc(50% - 10px);
+        }
     </style>
 </head>
 <body>
@@ -170,6 +178,8 @@
                     input.required = questionData.required;
                     answerContainer.appendChild(input);
                 } else if (questionData.type === 'radio') {
+                    const radioGroup = document.createElement('div');
+                    radioGroup.className = 'radio-group';
                     questionData.options.forEach(option => {
                         const label = document.createElement('label');
                         const input = document.createElement('input');
@@ -178,9 +188,9 @@
                         input.value = option;
                         label.appendChild(input);
                         label.appendChild(document.createTextNode(option));
-                        answerContainer.appendChild(label);
-                        answerContainer.appendChild(document.createElement('br'));
+                        radioGroup.appendChild(label);
                     });
+                    answerContainer.appendChild(radioGroup);
                 }
 
                 document.getElementById('question-container').style.display = 'block';
@@ -243,7 +253,10 @@
         }
 
         function redirectToOffer() {
-            window.open(link, '_blank'); // Abrir en una nueva pestaña
+            const a = document.createElement('a');
+            a.href = link;
+            a.target = '_blank';
+            a.click();
         }
 
         // Iniciar la primera pregunta

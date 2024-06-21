@@ -23,7 +23,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
             text-align: center;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
         }
         #question-container, #processing, #result {
             display: none;
@@ -37,35 +37,41 @@
             color: #ffffff; /* Color del texto blanco */
         }
         .button {
-            background-color: #00b0ff;
+            background-color: #4caf50; /* Verde */
             border: none;
-            color: white;
-            padding: 12px 25px;
+            color: #ffffff; /* Blanco para el texto */
+            padding: 15px 40px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 18px;
-            margin: 15px 0;
+            font-size: 20px;
+            margin-top: 20px; /* Espacio entre el mensaje y el botón */
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .button:hover {
-            background-color: #0091ea;
+            background-color: #45a049; /* Verde más oscuro al pasar el mouse */
             transform: scale(1.05);
         }
-        input[type="text"], input[type="number"], input[type="radio"] {
+        input[type="text"], input[type="number"] {
             width: calc(100% - 22px); /* Padding adjustment */
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: none;
-            border-radius: 5px;
+            border-radius: 5px; /* Cuadrados para las cifras */
             font-size: 16px;
             box-sizing: border-box;
         }
+        input[type="radio"] {
+            width: 18px; /* Ancho más grande para los círculos de selección */
+            height: 18px; /* Alto más grande para los círculos de selección */
+            margin-right: 8px;
+        }
         label {
-            display: block;
-            margin: 10px 0;
+            display: inline-block;
+            margin: 10px 20px;
             font-size: 16px;
             color: #ffffff; /* Color del texto blanco */
             text-align: left;
@@ -79,6 +85,25 @@
             font-size: 18px;
             color: #ffffff; /* Color del texto blanco */
             text-align: left;
+            margin-bottom: 10px;
+        }
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option {
+            width: calc(50% - 10px); /* Para dos opciones, con margen */
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .option span {
+            margin-left: 10px;
+        }
+        #result-text {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -87,14 +112,12 @@
         <h1>Iniciar tu solicitud</h1>
         <div id="question-container">
             <p id="question"></p>
-            <div id="answer-container"></div>
+            <div id="answer-container" class="options-container"></div>
             <button class="button" onclick="nextQuestion()">Siguiente</button>
         </div>
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
-            <p>Nuestro sistema automático ha procesado tus datos y a continuación te ofrecerá la opción más adecuada para ti.</p>
-            <br>
-            <p>Si estás de acuerdo, haz clic en <button class="button" onclick="processRequest()">Solicitar</button>.</p>
+            <p id="result-text">Hemos encontrado la oferta adecuada para ti. Si estás interesado, haz clic en <a href="http://doafftracking.tech/zaimoo.es/u2wsh/1" class="button" target="_blank">Solicitar</a>.</p>
         </div>
     </div>
 
@@ -161,7 +184,7 @@
         function showQuestion() {
             if (currentQuestion < questions.length) {
                 const questionData = questions[currentQuestion];
-                document.getElementById('question').innerText = questionData.question.replace('&#191;', '');
+                document.getElementById('question').innerText = questionData.question.replace('¿', '').replace('?', '');
                 const answerContainer = document.getElementById('answer-container');
                 answerContainer.innerHTML = '';
 
@@ -172,21 +195,38 @@
                     input.required = questionData.required;
                     answerContainer.appendChild(input);
                 } else if (questionData.type === 'radio') {
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.classList.add('options-container');
+
                     questionData.options.forEach(option => {
                         const label = document.createElement('label');
+                        label.classList.add('option');
+
                         const input = document.createElement('input');
                         input.type = 'radio';
                         input.name = 'answer';
                         input.value = option;
+
+                        const span = document.createElement('span');
+                        span.textContent = option;
+
                         label.appendChild(input);
-                        label.appendChild(document.createTextNode(option));
-                        answerContainer.appendChild(label);
+                        label.appendChild(span);
+
+                        optionsContainer.appendChild(label);
                     });
+
+                    answerContainer.appendChild(optionsContainer);
                 }
 
                 document.getElementById('question-container').style.display = 'block';
             } else {
-                document.getElementById('result').style.display = 'block'; // Mostrar el mensaje final
+                document.getElementById('question-container').style.display = 'none';
+                document.getElementById('processing').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('processing').style.display = 'none';
+                    document.getElementById('result').style.display = 'block';
+                }, 3000); // Mostrar el mensaje de procesamiento durante 3 segundos
             }
         }
 
@@ -232,20 +272,6 @@
 
             currentQuestion++;
             showQuestion();
-        }
-
-        function processRequest() {
-            document.getElementById('question-container').style.display = 'none';
-            document.getElementById('processing').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('processing').innerText = 'A continuación te redirigiremos a la opción más adecuada para ti.';
-                document.getElementById('result').style.display = 'block'; // Mostrar el mensaje final
-            }, 3000); // Mostrar el mensaje de procesamiento durante 3 segundos
-        }
-
-        function redirectToOffer() {
-            const randomIndex = Math.floor(Math.random() * links.length);
-            window.location.href = links[randomIndex]; // Redirigir al enlace aleatorio
         }
 
         // Iniciar la primera pregunta

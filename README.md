@@ -6,8 +6,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #1c1f26, #283048);
-            color: #ffeb3b;
+            background: #1d0552; /* Fondo púrpura sólido */
+            color: #ffffff; /* Color del texto blanco */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,7 +17,7 @@
             box-sizing: border-box;
         }
         #container {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(29, 5, 82, 0.9); /* Fondo del contenedor con algo de transparencia */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
@@ -30,11 +30,11 @@
         }
         #processing {
             font-size: 20px;
-            color: #00c853;
+            color: #00c853; /* Verde para el texto de procesamiento */
         }
         #result {
             font-size: 20px;
-            color: #00b0ff;
+            color: #00b0ff; /* Azul para el texto de resultados */
         }
         .button {
             background-color: #00b0ff;
@@ -69,16 +69,17 @@
             display: block;
             margin: 10px 0;
             font-size: 16px;
-            color: #ffeb3b;
+            color: #ffffff; /* Color del texto blanco */
             text-align: left;
         }
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
-            color: #ffeb3b;
+            color: #ffffff; /* Color del texto blanco */
         }
         p {
             font-size: 18px;
+            color: #ffffff; /* Color del texto blanco */
             text-align: left;
         }
     </style>

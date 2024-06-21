@@ -66,11 +66,28 @@
             box-sizing: border-box;
         }
         label {
-            display: block;
-            margin: 10px 0;
+            display: inline-block; /* Mostrar los labels en línea */
+            margin: 10px;
             font-size: 16px;
             color: #ffffff; /* Color del texto blanco */
             text-align: left;
+            flex-basis: 50%; /* Ocupar el 50% del contenedor para dos columnas */
+        }
+        input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            outline: none;
+            margin-right: 10px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        input[type="radio"]:checked {
+            background-color: #ffffff;
         }
         h1 {
             font-size: 24px;
@@ -86,7 +103,7 @@
 </head>
 <body>
     <div id="container">
-        <h1>Iniciar tu solicitud</h1>
+        <h1>Iniciar tu solicitud</h1> <!-- Título modificado según lo solicitado -->
         <div id="question-container">
             <p id="question"></p>
             <div id="answer-container"></div>
@@ -181,7 +198,6 @@
                         label.appendChild(input);
                         label.appendChild(document.createTextNode(option));
                         answerContainer.appendChild(label);
-                        answerContainer.appendChild(document.createElement('br'));
                     });
                 }
 

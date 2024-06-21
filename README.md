@@ -34,7 +34,7 @@
         }
         #result {
             font-size: 20px;
-            color: #00b0ff; /* Azul para el texto de resultados */
+            color: #ffffff; /* Color del texto blanco */
         }
         .button {
             background-color: #00b0ff;
@@ -49,8 +49,6 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
-            width: 100%;
-            max-width: 200px; /* Ajuste el ancho máximo para dispositivos móviles */
         }
         .button:hover {
             background-color: #0091ea;
@@ -66,28 +64,11 @@
             box-sizing: border-box;
         }
         label {
-            display: inline-block; /* Mostrar los labels en línea */
-            margin: 10px;
+            display: block;
+            margin: 10px 0;
             font-size: 16px;
             color: #ffffff; /* Color del texto blanco */
             text-align: left;
-            flex-basis: 50%; /* Ocupar el 50% del contenedor para dos columnas */
-        }
-        input[type="radio"] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            outline: none;
-            margin-right: 10px;
-            vertical-align: middle;
-            cursor: pointer;
-        }
-        input[type="radio"]:checked {
-            background-color: #ffffff;
         }
         h1 {
             font-size: 24px;
@@ -103,7 +84,7 @@
 </head>
 <body>
     <div id="container">
-        <h1>Iniciar tu solicitud</h1> <!-- Título modificado según lo solicitado -->
+        <h1>Iniciar tu solicitud</h1>
         <div id="question-container">
             <p id="question"></p>
             <div id="answer-container"></div>
@@ -111,9 +92,9 @@
         </div>
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
-            Nuestro sistema automático ha procesado tus datos y a continuación te ofrece la opción más adecuada para ti.
-            <br><br>
-            Si estás de acuerdo, haz clic en <button class="button" onclick="redirectToOffer()">Solicitar</button>.
+            <p>Nuestro sistema automático ha procesado tus datos y a continuación te ofrece la opción más adecuada para ti.</p>
+            <br>
+            <p>Si estás de acuerdo, haz clic en <button class="button" onclick="redirectToOffer()">Solicitar</button> ahora.</p>
         </div>
     </div>
 
@@ -258,7 +239,7 @@
             document.getElementById('processing').style.display = 'block';
             setTimeout(function() {
                 document.getElementById('processing').innerText = 'A continuación te redirigiremos a la opción más adecuada para ti.';
-                setTimeout(redirectToOffer, 2000); // Esperar 2 segundos antes de redirigir
+                document.getElementById('result').style.display = 'block'; // Mostrar el mensaje final
             }, 3000); // Mostrar el mensaje de procesamiento durante 3 segundos
         }
 

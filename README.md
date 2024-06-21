@@ -82,22 +82,6 @@
             color: #ffffff; /* Color del texto blanco */
             text-align: left;
         }
-        .radio-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .radio-group label {
-            width: calc(50% - 10px);
-        }
-        .offer-link {
-            color: #00b0ff; /* Color azul para el enlace */
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .offer-link:hover {
-            color: #0091ea; /* Color azul más oscuro al pasar el ratón */
-        }
     </style>
 </head>
 <body>
@@ -111,9 +95,6 @@
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
             Nuestro sistema automático ha procesado tus datos y a continuación te ofrece la opción más adecuada para ti.
-        </div>
-        <div id="offerLinkContainer" style="display: none;">
-            <p>¡Tu solicitud ha sido procesada! Haz clic <span class="offer-link" onclick="redirectToOffer()">aquí</span> para ver la oferta.</p>
         </div>
     </div>
 
@@ -171,7 +152,9 @@
             }
         ];
 
-        const link = "http://doafftracking.tech/zaimoo.es/u2wsh/1"; // Este es el enlace que redirige al usuario.
+        const links = [
+            "http://doafftracking.tech/zaimoo.es/u2wsh/1" // Este es el enlace que redirige al usuario.
+        ];
 
         let currentQuestion = 0;
 
@@ -189,8 +172,6 @@
                     input.required = questionData.required;
                     answerContainer.appendChild(input);
                 } else if (questionData.type === 'radio') {
-                    const radioGroup = document.createElement('div');
-                    radioGroup.className = 'radio-group';
                     questionData.options.forEach(option => {
                         const label = document.createElement('label');
                         const input = document.createElement('input');
@@ -199,9 +180,9 @@
                         input.value = option;
                         label.appendChild(input);
                         label.appendChild(document.createTextNode(option));
-                        radioGroup.appendChild(label);
+                        answerContainer.appendChild(label);
+                        answerContainer.appendChild(document.createElement('br'));
                     });
-                    answerContainer.appendChild(radioGroup);
                 }
 
                 document.getElementById('question-container').style.display = 'block';
@@ -248,8 +229,6 @@
                 return;
             } else if (questionData.question.includes('¿Tienes un código de oferta?') && answer === 'No') {
                 currentQuestion += 2; // Saltar la pregunta opcional
-                showQuestion();
-                return;
             }
 
             currentQuestion++;
@@ -259,18 +238,18 @@
         function processRequest() {
             document.getElementById('question-container').style.display = 'none';
             document.getElementById('processing').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('processing').style.display = 'none';
-                document.getElementById('result').style.display = 'block';
-                document.getElementById('offerLinkContainer').style.display = 'block'; // Mostrar el enlace de la oferta
-            }, 2000); // Simulación de proceso, en realidad deberías tener tu lógica de procesamiento aquí
+            setTimeout(function() {
+                document.getElementById('processing').innerText = 'A continuación te redirigiremos a la opción más adecuada para ti.';
+                setTimeout(redirectToOffer, 2000); // Esperar 2 segundos antes de redirigir
+            }, 3000); // Mostrar el mensaje de procesamiento durante 3 segundos
         }
 
         function redirectToOffer() {
-            window.open(link, '_blank'); // Abrir el enlace en una nueva pestaña
+            const randomIndex = Math.floor(Math.random() * links.length);
+            window.location.href = links[randomIndex]; // Cambio a window.location.href para evitar el bloqueo de ventanas emergentes
         }
 
-        // Mostrar la primera pregunta al cargar la página
+        // Iniciar la primera pregunta
         showQuestion();
     </script>
 </body>

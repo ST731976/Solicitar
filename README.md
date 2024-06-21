@@ -92,9 +92,9 @@
         </div>
         <div id="processing">Procesando tu solicitud...</div>
         <div id="result">
-            <p>Nuestro sistema automático ha procesado tus datos y a continuación te ofrece la opción más adecuada para ti.</p>
+            <p>Nuestro sistema automático ha procesado tus datos y a continuación te ofrecerá la opción más adecuada para ti.</p>
             <br>
-            <p>Si estás de acuerdo, haz clic en <button class="button" onclick="redirectToOffer()">Solicitar</button> ahora.</p>
+            <p>Si estás de acuerdo, haz clic en <button class="button" onclick="processRequest()">Solicitar</button>.</p>
         </div>
     </div>
 
@@ -186,7 +186,7 @@
 
                 document.getElementById('question-container').style.display = 'block';
             } else {
-                processRequest();
+                document.getElementById('result').style.display = 'block'; // Mostrar el mensaje final
             }
         }
 
@@ -245,7 +245,7 @@
 
         function redirectToOffer() {
             const randomIndex = Math.floor(Math.random() * links.length);
-            window.location.href = links[randomIndex]; // Cambio a window.location.href para evitar el bloqueo de ventanas emergentes
+            window.location.href = links[randomIndex]; // Redirigir al enlace aleatorio
         }
 
         // Iniciar la primera pregunta

@@ -6,8 +6,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: #1d0552; /* Fondo púrpura sólido */
-            color: #ffffff; /* Color del texto blanco */
+            background: #1d0552;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,7 +17,7 @@
             box-sizing: border-box;
         }
         #container {
-            background: rgba(29, 5, 82, 0.9); /* Fondo del contenedor con algo de transparencia */
+            background: rgba(29, 5, 82, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
@@ -30,60 +30,59 @@
         }
         #processing {
             font-size: 20px;
-            color: #00c853; /* Verde para el texto de procesamiento */
+            color: #00c853;
         }
         #result {
             font-size: 20px;
-            color: #ffffff; /* Color del texto blanco */
         }
         .button {
-            background-color: #4caf50; /* Verde */
+            background-color: #4caf50;
             border: none;
-            color: #ffffff; /* Blanco para el texto */
+            color: #ffffff;
             padding: 15px 40px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 20px;
-            margin-top: 20px; /* Espacio entre el mensaje y el botón */
+            margin-top: 20px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .button:hover {
-            background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+            background-color: #45a049;
             transform: scale(1.05);
         }
         input[type="text"], input[type="number"] {
-            width: calc(100% - 22px); /* Padding adjustment */
+            width: calc(100% - 22px);
             padding: 12px;
             margin: 10px 0;
             border: none;
-            border-radius: 5px; /* Cuadrados para las cifras */
+            border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
         }
         input[type="radio"] {
-            width: 18px; /* Ancho más grande para los círculos de selección */
-            height: 18px; /* Alto más grande para los círculos de selección */
+            width: 18px;
+            height: 18px;
             margin-right: 8px;
         }
         label {
             display: inline-block;
             margin: 10px 20px;
             font-size: 16px;
-            color: #ffffff; /* Color del texto blanco */
             text-align: left;
+        }
+        h1, p {
+            color: #ffffff;
         }
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
-            color: #ffffff; /* Color del texto blanco */
         }
         p {
             font-size: 18px;
-            color: #ffffff; /* Color del texto blanco */
             text-align: left;
             margin-bottom: 10px;
         }
@@ -94,7 +93,7 @@
             align-items: center;
         }
         .option {
-            width: calc(50% - 10px); /* Para dos opciones, con margen */
+            width: calc(50% - 10px);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
@@ -132,12 +131,14 @@
             {
                 question: "Cantidad que necesitas (mínimo 50 euros)",
                 type: "number",
-                required: true
+                required: true,
+                min: 50
             },
             {
                 question: "Plazo (en meses, mínimo 1 mes)",
                 type: "number",
-                required: true
+                required: true,
+                min: 1
             },
             {
                 question: "Actividad laboral (necesario)*",
@@ -148,7 +149,8 @@
             {
                 question: "Ingresos mensuales aproximados",
                 type: "number",
-                required: true
+                required: true,
+                min: 0
             },
             {
                 question: "ASNEF (necesario)*",
@@ -175,16 +177,12 @@
             }
         ];
 
-        const links = [
-            "http://doafftracking.tech/zaimoo.es/u2wsh/1" // Este es el enlace que redirige al usuario.
-        ];
-
         let currentQuestion = 0;
 
         function showQuestion() {
             if (currentQuestion < questions.length) {
                 const questionData = questions[currentQuestion];
-                document.getElementById('question').innerText = questionData.question.replace('¿', '').replace('?', '');
+                document.getElementById('question').innerText = questionData.question;
                 const answerContainer = document.getElementById('answer-container');
                 answerContainer.innerHTML = '';
 
@@ -193,6 +191,10 @@
                     input.type = questionData.type;
                     input.id = 'answer';
                     input.required = questionData.required;
+                    if (questionData.min !== undefined) {
+                        input.min = questionData.min;
+                    }
+                    input.setAttribute('aria-label', questionData.question);
                     answerContainer.appendChild(input);
                 } else if (questionData.type === 'radio') {
                     const optionsContainer = document.createElement('div');
@@ -206,6 +208,7 @@
                         input.type = 'radio';
                         input.name = 'answer';
                         input.value = option;
+                        input.setAttribute('aria-label', option);
 
                         const span = document.createElement('span');
                         span.textContent = option;
@@ -226,7 +229,7 @@
                 setTimeout(function() {
                     document.getElementById('processing').style.display = 'none';
                     document.getElementById('result').style.display = 'block';
-                }, 3000); // Mostrar el mensaje de procesamiento durante 3 segundos
+                }, 3000);
             }
         }
 
@@ -267,14 +270,13 @@
                 showQuestion();
                 return;
             } else if (questionData.question.includes('¿Tienes un código de oferta?') && answer === 'No') {
-                currentQuestion += 2; // Saltar la pregunta opcional
+                currentQuestion += 2;
             }
 
             currentQuestion++;
             showQuestion();
         }
 
-        // Iniciar la primera pregunta
         showQuestion();
     </script>
 </body>
